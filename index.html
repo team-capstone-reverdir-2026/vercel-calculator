@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>덧셈 계산기</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 80px auto; text-align: center; }
+    input { width: 80px; padding: 8px; font-size: 1.2rem; margin: 5px; }
+    button { padding: 10px 24px; font-size: 1rem; cursor: pointer; margin-top: 10px; }
+    #result { font-size: 1.5rem; margin-top: 20px; color: #333; }
+  </style>
+</head>
+<body>
+  <h2>➕ 덧셈 계산기</h2>
+  <input type="number" id="a" placeholder="숫자 1" />
+  <span style="font-size:1.5rem">+</span>
+  <input type="number" id="b" placeholder="숫자 2" />
+  <br>
+  <button onclick="calculate()">Submit</button>
+  <div id="result"></div>
+
+  <script>
+    async function calculate() {
+      const a = document.getElementById('a').value;
+      const b = document.getElementById('b').value;
+      const res = await fetch(`/api/add?a=${a}&b=${b}`);
+      const data = await res.json();
+      document.getElementById('result').innerText = `결과: ${data.result}`;
+    }
+  </script>
+</body>
+</html>
